@@ -17,15 +17,24 @@ class App extends Component{
             }
         })
     }
+    showTotalTime = (initialTime, stopTime)=> {
+        console.log(initialTime - stopTime)
+         }
+       
+    showDurationTime = (initialTime, stopTime) => {
+         console.log(stopTime - initialTime)
+    }
+
     render(){
         return (
             <Fragment>
                 <Timer time="5" onTimeOut={this.switchTimer} />
                 <button onClick={this.switchTimer}>Переключить таймер</button>
                 <RenderIf condition={this.state.showTimer}>
-                    <Timer time="6000" step="2" autoStart/>
+                    <Timer  time="6000" step="2" autoStart/>
                 </RenderIf>
-                <Timer time='0' reverse={false} autoStart/>
+                <Timer onTimeChange={this.showDurationTime} time='0' reverse={false} autoStart/>
+                <Timer onTimeChange={this.showTotalTime} time="60" reverse autoStart />
             </Fragment>
         );
     }

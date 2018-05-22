@@ -10,7 +10,8 @@ class Timer extends Component {
         step: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
         autoStart: PropTypes.bool,
         reverse: PropTypes.bool,
-        onTimeOut: PropTypes.func
+        onTimeOut: PropTypes.func,
+        onTimeChange: PropTypes.func,
 
     };
 
@@ -19,7 +20,8 @@ class Timer extends Component {
         step: 1,
         autoStart: false,
         reverse: true,
-        onTimeOut: console.log.bind(console, "Time out!")
+        onTimeOut: console.log.bind(console, "Time out!"),
+        onTimeChange: () => {},
     };
 
     state = {
@@ -93,6 +95,7 @@ class Timer extends Component {
         clearInterval(this.timerId);
         this.timerId = null;
         this.toggleIsStarted(false);
+        this.props.onTimeChange(this.props.time, this.state.time);
     };
     resetHandler = () => {
         this.setState({
